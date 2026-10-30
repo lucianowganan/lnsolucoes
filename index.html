@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>LN Soluções Empresariais · site (versão interna)</title>
+<title>LN Soluções Empresariais · vagas CLT</title>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&amp;family=Hanken+Grotesk:wght@300..800&amp;display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <style>
@@ -274,7 +274,7 @@ td select { padding: 6px 10px; border-radius: 12px; border: 2px solid var(--line
   var MAIL = 'contato@lnsolucoesempresariais.com.br';
   var IG = '@ln.solucoesempresariais';
   var CNPJ = '68.378.072/0001-00';
-  var SEGS = ['Farmácia de manipulação', 'Suplementos esportivos', 'Outro segmento'];
+  var SEGS = ['Farmácia de manipulação', 'Indústria de suplementos', 'Supermercado', 'Loja de roupa feminina', 'Restaurante', 'Outro segmento'];
   var AREAS = ['Atendimento', 'Comercial', 'Administrativo', 'Recepção', 'Estoque e logística', 'Laboratório', 'Outra área'];
   var K = { v: 'ln_site_vagas_v1', t: 'ln_site_talentos_v1', c: 'ln_site_config_v1', a: 'ln_site_auth_v1' };
   var PL = 'M156,130 H296 A20,20 0 0 1 316,150 V646 H586 A20,20 0 0 1 606,666 V806 A20,20 0 0 1 586,826 H336 V701 A75,75 0 0 0 261,626 H136 V150 A20,20 0 0 1 156,130 Z';
@@ -372,7 +372,7 @@ td select { padding: 6px 10px; border-radius: 12px; border: 2px solid var(--line
   function logoChip() {
     return '<span class="chip"><svg viewBox="136 130 849 696" width="32" height="26" role="img" aria-label="LN"><path fill="#F6F1E7" d="' + PL + '"/><path fill="#F6F1E7" d="' + PN + '"/><path fill="#C6F963" d="' + PB + '"/></svg></span>';
   }
-  function topbar() { return '<div class="topbar"><div class="wrap">Versão interna de demonstração. Vagas e cadastros ficam só neste navegador.</div></div>'; }
+  function topbar() { return ''; }
   function navLink(href, label, active, key) { return '<a href="' + href + '"' + (active === key ? ' aria-current="page"' : '') + '>' + label + '</a>'; }
   function header(active) {
     return '<header class="site-head"><div class="wrap"><a class="brand" href="#/" aria-label="LN Soluções Empresariais, início">' + logoChip() + '<span><b>Soluções Empresariais</b><small>' + IG + '</small></span></a>' +
