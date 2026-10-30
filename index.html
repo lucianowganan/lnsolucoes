@@ -382,7 +382,7 @@ td select { padding: 6px 10px; border-radius: 12px; border: 2px solid var(--line
       '<nav class="nav" id="nav" aria-label="Principal">' +
       '<button class="btn ghost small close-nav" type="button" data-a="menu">Fechar ✕</button>' +
       navLink('#/vagas', 'Vagas', active, 'vagas') + navLink('#/talentos', 'Banco de talentos', active, 'talentos') +
-      navLink('#/dicas', 'Dicas', active, 'dicas') + navLink('#/blog', 'Blog', active, 'blog') + navLink('#/sobre', 'Sobre a LN', active, 'sobre') + navLink('#/verificar', 'Verificar vaga', active, 'verificar') +
+      navLink('#/dicas', 'Dicas', active, 'dicas') + navLink('#/blog', 'Blog', active, 'blog') + '<a href="/curriculo/">Gerador de currículo</a>' + navLink('#/sobre', 'Sobre a LN', active, 'sobre') + navLink('#/verificar', 'Verificar vaga', active, 'verificar') +
       '<a class="nav-ig" href="https://www.instagram.com/ln.solucoesempresariais/" target="_blank" rel="noopener" aria-label="Instagram da LN">' + ICON_IG + ' Instagram</a>' +
       '</nav></div></header>';
   }
@@ -428,6 +428,7 @@ td select { padding: 6px 10px; border-radius: 12px; border: 2px solid var(--line
       step('s2', 2, 'você se candidata', 'Envie o currículo por e-mail ou entre no banco de talentos.') +
       step('s3', 3, 'entrevista com a LN', 'A LN conversa com você sobre a vaga.') +
       step('s4', 4, 'contratação CLT', 'A carteira é assinada pela LN e você trabalha na empresa cliente.') + '</div></div></section>' +
+      '<section class="blk"><div class="wrap"><div class="band" style="background:var(--accent);color:var(--on-accent)"><div><h2 style="color:var(--on-accent)">Monte seu currículo grátis, com dicas em cada etapa.</h2><p>Preencha pelo celular, receba sugestões enquanto escreve e baixe o PDF pronto. Sem cadastro.</p></div><div class="btns"><a class="btn primary" href="/curriculo/" style="background:var(--profundo);color:#fff;border-color:var(--profundo)">Criar meu currículo</a></div></div></div></section>' +
       '<section class="blk"><div class="wrap"><div class="band folha"><div><h2>Vaga falsa existe! Confirme antes de enviar qualquer dado.</h2><p>Digite o código que aparece no anúncio e veja se a vaga é da LN. Se não aparecer aqui, desconfie.</p></div><div class="btns"><a class="btn primary" href="#/verificar">Verificar uma vaga</a><a class="btn ghost" href="#/dicas">Ver sinais de golpe</a></div></div></div></section>' +
       '<section class="blk" style="padding-top:0"><div class="wrap"><div class="band lima"><div><h2>Não achou a vaga certa?</h2><p>Deixe seus dados e a LN chama você quando abrir uma vaga compatível com o seu perfil.</p></div><div class="btns"><a class="btn primary" href="#/talentos">Entrar no banco de talentos</a></div></div></div></section>';
   }
