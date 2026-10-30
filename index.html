@@ -3,7 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>LN Soluções Empresariais · vagas CLT</title>
+<title>LN Soluções Empresariais · vagas com carteira assinada</title>
+<meta name="description" content="Vagas de emprego CLT em Itajubá e região. A LN contrata com carteira assinada e você trabalha na empresa cliente. Veja as vagas abertas, entre no banco de talentos e monte seu currículo grátis.">
+<link rel="canonical" href="https://lnsolucoesempresariais.com.br/">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="LN Soluções Empresariais">
+<meta property="og:title" content="LN Soluções Empresariais · vagas com carteira assinada">
+<meta property="og:description" content="Vagas de emprego CLT em Itajubá e região. A LN contrata com carteira assinada e você trabalha na empresa cliente. Veja as vagas abertas, entre no banco de talentos e monte seu currículo grátis.">
+<meta property="og:url" content="https://lnsolucoesempresariais.com.br/">
+<meta property="og:image" content="https://lnsolucoesempresariais.com.br/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LN Soluções Empresariais · vagas com carteira assinada">
+<meta name="twitter:description" content="Vagas de emprego CLT em Itajubá e região. A LN contrata com carteira assinada e você trabalha na empresa cliente. Veja as vagas abertas, entre no banco de talentos e monte seu currículo grátis.">
+<meta name="twitter:image" content="https://lnsolucoesempresariais.com.br/og-image.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#062E22">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"LN Soluções Empresariais","url":"https://lnsolucoesempresariais.com.br","logo":"https://lnsolucoesempresariais.com.br/icon-512.png","email":"contato@lnsolucoesempresariais.com.br","taxID":"68.378.072/0001-00","sameAs":["https://www.instagram.com/ln.solucoesempresariais/"]}</script>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&amp;family=Hanken+Grotesk:wght@300..800&amp;display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <style>
@@ -467,7 +489,7 @@ td select { padding: 6px 10px; border-radius: 12px; border: 2px solid var(--line
   function pTalentos() {
     if (ui.flash === 'talento-ok') {
       ui.flash = null;
-      return '<section class="page-head gridbg"><div class="wrap"><div class="band lima"><div><h2>Cadastro recebido.</h2><p>A LN guarda seus dados e chama você por e-mail ou telefone quando abrir uma vaga compatível. Neste protótipo, o cadastro fica só neste navegador.</p></div><div class="btns"><a class="btn primary" href="#/vagas">Ver vagas abertas</a><a class="btn ghost" href="#/dicas">Ver dicas de currículo</a></div></div></div></section>';
+      return '<section class="page-head gridbg"><div class="wrap"><div class="band lima"><div><h2>Cadastro recebido.</h2><p>A LN guarda seus dados e chama você por e-mail ou telefone quando abrir uma vaga compatível.</p></div><div class="btns"><a class="btn primary" href="#/vagas">Ver vagas abertas</a><a class="btn ghost" href="#/dicas">Ver dicas de currículo</a></div></div></div></section>';
     }
     var areas = AREAS.map(function (a) { var outro = a === 'Outra área' ? ' data-outro="1"' : ''; return '<label><input type="checkbox" name="areas" value="' + esc(a) + '"' + outro + '> ' + esc(a) + '</label>'; }).join('');
     return '<section class="page-head gridbg"><div class="wrap"><h1 class="sec-title" style="margin:0"><small>não achou a vaga?</small>banco de talentos</h1><p class="intro">Deixe seus dados uma vez. Quando abrir uma vaga compatível, a LN entra em contato com você.</p></div></section>' +
@@ -482,7 +504,7 @@ td select { padding: 6px 10px; border-radius: 12px; border: 2px solid var(--line
       '<div class="field"><label for="t-cid">Cidade e estado</label><input id="t-cid" name="cidade" type="text" autocomplete="address-level2" required><span class="err" data-err="cidade"></span></div>' +
       '<div class="field"><span class="lab">Áreas de interesse</span><div class="chips">' + areas + '</div></div>' +
       '<div class="field" id="outraAreaWrap" style="display:none"><label for="t-outra">Qual área?</label><input id="t-outra" name="areaOutra" type="text" placeholder="Diga qual área te interessa"></div>' +
-      '<div class="field"><label for="t-cv">Currículo em PDF (opcional)</label><input id="t-cv" name="cv" type="file" accept="application/pdf"><span class="hint">Neste protótipo só o nome do arquivo é guardado.</span></div>' +
+      '<div class="field"><label for="t-cv">Currículo em PDF (opcional)</label><input id="t-cv" name="cv" type="file" accept="application/pdf"><span class="hint">Por enquanto guardamos só o nome do arquivo. Se quiser mandar o PDF, envie para contato@lnsolucoesempresariais.com.br.</span></div>' +
       '<div class="field"><label for="t-msg">Mensagem (opcional)</label><textarea id="t-msg" name="mensagem" maxlength="300"></textarea></div>' +
       '<div class="hp" aria-hidden="true"><label>Não preencha este campo <input type="text" name="site" tabindex="-1" autocomplete="off"></label></div>' +
       '<div class="field"><label class="checkrow"><input type="checkbox" name="consent"><span>Autorizo a LN Soluções Empresariais, conforme a LGPD, a guardar meus dados por até 12 meses para me chamar em vagas compatíveis. <button type="button" class="linklike" data-a="privacidade">Ler o aviso de privacidade</button>.</span></label><span class="err" data-err="consent"></span></div>' +
@@ -575,11 +597,10 @@ td select { padding: 6px 10px; border-radius: 12px; border: 2px solid var(--line
   }
   function aPainel() {
     var c = { p: 0, r: 0, e: 0 }; vagas.forEach(function (v) { if (v.status === 'publicada') c.p++; else if (v.status === 'rascunho') c.r++; else c.e++; });
-    var ph = [['Fase 0', 'Este protótipo navegável', 'feito'], ['Fase 1', 'Banco de dados, login de verdade, admin de vagas e site lendo as vagas em tempo real', 'próxima'], ['Fase 2', 'Banco de talentos com consentimento e currículo em pasta privada', 'depois'], ['Fase 3', 'Empresas: portal para cadastrar vagas na LN', 'depois']];
     return adminShell({ head: '<h1 class="sec-title" style="margin:0"><small>bem-vindo</small>painel</h1>', body:
       '<div class="stats"><div class="stat"><b>' + c.p + '</b>vagas publicadas</div><div class="stat"><b>' + c.r + '</b>rascunhos</div><div class="stat"><b>' + c.e + '</b>encerradas</div><div class="stat"><b>' + talentos.length + '</b>no banco de talentos</div></div>' +
       '<div class="cta-row" style="margin-bottom:36px"><a class="btn primary" href="#/admin/vaga/nova">Nova vaga</a><a class="btn ghost" href="#/admin/vagas">Gerenciar vagas</a></div>' +
-      '<h2 style="font-size:36px">fases do projeto</h2><div class="phases">' + ph.map(function (p) { return '<div class="phase"><span class="pill ' + (p[2] === 'feito' ? 'acc' : 'out') + '">' + p[0] + '</span><div><b>' + p[1] + '</b><span class="muted">' + p[2] + '</span></div></div>'; }).join('') + '</div>' }, 'painel');
+      '<h2 style="font-size:36px">atalhos</h2><div class="phases">' + [['#/admin/talentos', 'Banco de talentos', 'ver cadastros e exportar CSV'], ['#/admin/blog', 'Blog', 'escrever e publicar posts'], ['/curriculo/', 'Gerador de currículo', 'página pública para candidatos'], ['#/', 'Ver o site', 'como o candidato enxerga']].map(function (p) { return '<a class="phase" href="' + p[0] + '" style="text-decoration:none"><span class="pill acc">abrir</span><div><b>' + p[1] + '</b><span class="muted">' + p[2] + '</span></div></a>'; }).join('') + '</div>' }, 'painel');
   }
   function aVagas() {
     var rows = vagas.map(function (v) {
@@ -619,7 +640,7 @@ td select { padding: 6px 10px; border-radius: 12px; border: 2px solid var(--line
     }).join('');
     return adminShell({ head: '<div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:end"><h1 class="sec-title" style="margin:0"><small>para SEO</small>blog</h1><a class="btn primary" href="#/admin/post/novo">Novo post</a></div>',
       body: (posts.length ? '<div class="tablewrap"><table><thead><tr><th>Título</th><th>Slug</th><th>Status</th><th>Atualizado</th><th>Ações</th></tr></thead><tbody>' + rows + '</tbody></table></div>' : '<div class="empty"><h3>Nenhum post ainda</h3><a class="btn primary" href="#/admin/post/novo">Novo post</a></div>') +
-      '<p class="muted" style="margin-top:18px">Protótipo: o blog roda dentro do mesmo site de página única. Para o Google indexar bem de verdade, o ideal é gerar páginas estáticas por post — isso é um passo futuro, não deste protótipo.</p>' }, 'blog');
+      '' }, 'blog');
   }
   function aPostForm(slug) {
     var isNew = slug === 'novo', p = isNew ? { slug: '', titulo: '', resumo: '', conteudo: '', status: 'rascunho' } : findPost(slug);
