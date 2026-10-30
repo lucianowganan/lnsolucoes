@@ -77,13 +77,15 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .nav a:hover { background: var(--line); }
 .nav a.nav-ig { display: inline-flex; align-items: center; gap: 6px; border: 2px solid currentColor; margin-left: 6px; }
 .nav a[aria-current="page"] { background: var(--brand); color: var(--on-brand); }
-.menu-btn { display: none; }
+.menu-btn, .close-nav { display: none; }
+.menu-btn, .close-nav { touch-action: manipulation; cursor: pointer; }
 @media (max-width: 860px) {
   .menu-btn { display: inline-flex; }
   .nav { display: none; }
   .nav.open { display: flex; position: fixed; inset: 0; z-index: 40; background: var(--surface); flex-direction: column; align-items: stretch; padding: 24px; padding-top: calc(24px + env(safe-area-inset-top, 0px)); overflow-y: auto; }
   .nav a { padding: 16px 14px; font-size: 20px; }
-  .nav .close-nav { align-self: flex-end; margin-bottom: 16px; }
+  .nav.open .close-nav { display: inline-flex; align-self: flex-end; margin-bottom: 16px; }
+  body.menu-open { overflow: hidden; }
 }
 
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 24px; border-radius: 999px; font-weight: 700; border: 2px solid transparent; cursor: pointer; text-decoration: none; background: transparent; line-height: 1.2; }
@@ -268,14 +270,14 @@ td select { padding: 6px 10px; border-radius: 12px; border: 2px solid var(--line
 /* botões: preenchem com cor de contraste ao passar o mouse, em vez de só subir */
 .btn { position: relative; isolation: isolate; overflow: hidden; transition: color .3s ease, border-color .3s ease, transform .15s ease; }
 .btn::after { content: ""; position: absolute; inset: 0; z-index: -1; transform: scaleX(0); transform-origin: left; transition: transform .4s cubic-bezier(.65,0,.35,1); }
-.btn:hover::after { transform: scaleX(1); }
+@media (hover: hover) { .btn:hover::after { transform: scaleX(1); } }
 .btn.primary::after, .btn.dark::after { background: var(--lima); }
 .btn.primary:hover, .btn.dark:hover { color: var(--floresta); }
 .btn.ghost::after { background: var(--brand); }
 .btn.ghost:hover { color: var(--on-brand); }
 .btn.warn::after { background: var(--signal-text); }
 .btn.warn:hover { color: #FFFFFF; }
-.btn:hover { transform: translateY(-2px); }
+@media (hover: hover) { .btn:hover { transform: translateY(-2px); } }
 .btn:active { transform: translateY(0); }
 .vcard { transition: transform .2s ease, box-shadow .2s ease; }
 .vcard:hover { transform: translateY(-4px); }
@@ -733,7 +735,7 @@ td select { padding: 6px 10px; border-radius: 12px; border: 2px solid var(--line
   document.addEventListener('click', function (e) {
     var t = e.target.closest('[data-a]'); if (!t) return;
     var a = t.dataset.a;
-    if (a === 'menu') { var n = document.getElementById('nav'); var o = n.classList.toggle('open'); t.setAttribute('aria-expanded', o); return; }
+    if (a === 'menu') { e.preventDefault(); var n = document.getElementById('nav'); var o = n.classList.toggle('open'); document.body.classList.toggle('menu-open', o); var mb = document.querySelector('.menu-btn'); if (mb) mb.setAttribute('aria-expanded', o); return; }
     if (a === 'theme') { var r = document.documentElement, cur = r.getAttribute('data-theme'); var dark = cur ? cur === 'dark' : (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches); r.setAttribute('data-theme', dark ? 'light' : 'dark'); return; }
     if (a === 'seg') { ui.filterSeg = t.dataset.v || ''; render(true); return; }
     if (a === 'logout') { sb.auth.signOut().then(function () { authed = false; talentos = []; go('#/'); }); return; }
@@ -896,9 +898,11 @@ td select { padding: 6px 10px; border-radius: 12px; border: 2px solid var(--line
       return;
     }
   });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { var n = document.getElementById('nav'); if (n && n.classList.contains('open')) { n.classList.remove('open'); document.body.classList.remove('menu-open'); } } });
   document.addEventListener('click', function (e) {
     if (e.target.closest('#nav a')) {
       var n = document.getElementById('nav'); if (n) n.classList.remove('open');
+      document.body.classList.remove('menu-open');
       var mb = document.querySelector('.menu-btn'); if (mb) mb.setAttribute('aria-expanded', 'false');
     }
   });
