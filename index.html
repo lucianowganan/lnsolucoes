@@ -463,7 +463,7 @@ td select { padding: 6px 10px; border-radius: 12px; border: 2px solid var(--line
     var f = ui.filterSeg, q = ui.q.toLowerCase();
     var qn = normCode(ui.q);
     var list = all.filter(function (v) { return (!f || v.segmento === f) && (!q || (v.titulo + ' ' + v.segmento + ' ' + v.codigo).toLowerCase().indexOf(q) >= 0 || (qn && normCode(v.codigo).indexOf(qn) >= 0)); });
-    var chips = '<button class="chipf" data-a="seg" data-v="" aria-pressed="' + (!f) + '">Todos</button>' + SEGS.map(function (s) { return '<button class="chipf" data-a="seg" data-v="' + esc(s) + '" aria-pressed="' + (f === s) + '">' + esc(s) + '</button>'; }).join('');
+    var chips = '<button class="chipf" data-a="seg" data-v="" aria-pressed="' + (!f) + '">Todos</button>' + SEGS.filter(function (s) { return s !== 'Outro segmento'; }).concat(all.map(function (v) { return v.segmento; }).filter(function (s, i, a) { return s && SEGS.indexOf(s) < 0 && a.indexOf(s) === i; })).map(function (s) { return '<button class="chipf" data-a="seg" data-v="' + esc(s) + '" aria-pressed="' + (f === s) + '">' + esc(s) + '</button>'; }).join('');
     var body = list.length ? '<div class="vgrid">' + list.map(function (v) { return vagaCard(v); }).join('') + '</div>' : (all.length ? '<div class="empty"><h3>Nada com esse filtro</h3><p>Tente outro segmento ou limpe a busca.</p></div>' : emptyVagas());
     return '<section class="page-head gridbg"><div class="wrap"><h1 class="sec-title" style="margin:0"><small>todas as</small>vagas abertas</h1><p class="intro">Cada pasta é um segmento de empresa. A LN não publica salário nem local no anúncio: esses dados são passados no contato.</p></div></section>' +
       '<section class="blk" style="padding-top:32px"><div class="wrap"><div class="filters">' + chips + '<input class="search" type="search" placeholder="Buscar por nome ou código" aria-label="Buscar vaga" data-in="q" value="' + esc(ui.q) + '"></div>' + body + '</div></section>';
@@ -624,7 +624,8 @@ td select { padding: 6px 10px; border-radius: 12px; border: 2px solid var(--line
     return adminShell({ head: '<h1 class="sec-title" style="margin:0"><small>' + (isNew ? 'nova' : 'editar') + '</small>vaga ' + esc(v.codigo) + '</h1>', body:
       '<div class="editor"><form class="card form" data-form="vaga" novalidate><input type="hidden" name="codigo" value="' + esc(v.codigo) + '"><input type="hidden" name="id" value="' + esc(v.id || '') + '"><input type="hidden" name="isnew" value="' + (isNew ? '1' : '') + '">' +
       '<div class="field"><label for="f-tit">Título da vaga</label><input id="f-tit" name="titulo" type="text" value="' + esc(d.titulo) + '"><span class="err" data-err="titulo"></span></div>' +
-      '<div class="field"><label for="f-seg">Segmento da empresa</label><select id="f-seg" name="segmento">' + opts(SEGS, d.segmento) + '</select><span class="hint">Aparece na aba da pasta. O nome da empresa nunca aparece.</span></div>' +
+      '<div class="field"><label for="f-seg">Segmento da empresa</label><select id="f-seg" name="segmento">' + opts(SEGS, SEGS.indexOf(d.segmento) >= 0 ? d.segmento : 'Outro segmento') + '</select><span class="hint">Aparece na aba da pasta. O nome da empresa nunca aparece.</span></div>' +
+      '<div class="field" id="segOutroWrap"' + (SEGS.indexOf(d.segmento) >= 0 && d.segmento !== 'Outro segmento' ? ' style="display:none"' : '') + '><label for="f-seg-outro">Qual segmento?</label><input id="f-seg-outro" name="segOutro" maxlength="40" placeholder="Ex.: padaria, transportadora, clínica" value="' + esc(SEGS.indexOf(d.segmento) >= 0 ? '' : d.segmento) + '"><span class="hint">Escreva só o tipo de empresa, nunca o nome dela.</span></div>' +
       '<div class="field"><label for="f-mod">Modalidade</label><select id="f-mod" name="modalidade">' + opts(['Presencial', 'Híbrido', 'Remoto'], d.modalidade) + '</select></div>' +
       '<div class="field"><label for="f-hor">Horários (um por linha)</label><textarea id="f-hor" name="horarios">' + esc((d.horarios || []).join('\n')) + '</textarea></div>' +
       '<div class="field"><label for="f-ati">O que a pessoa faz (um por linha)</label><textarea id="f-ati" name="atividades">' + esc((d.atividades || []).join('\n')) + '</textarea></div>' +
@@ -801,6 +802,7 @@ td select { padding: 6px 10px; border-radius: 12px; border: 2px solid var(--line
   });
   document.addEventListener('change', function (e) {
     var t = e.target;
+    if (t.id === 'f-seg') { var sw = document.getElementById('segOutroWrap'); if (sw) { sw.style.display = t.value === 'Outro segmento' ? '' : 'none'; if (t.value === 'Outro segmento') { var si = document.getElementById('f-seg-outro'); if (si) si.focus(); } } }
     if (t.name === 'areas' && t.dataset && t.dataset.outro === '1') {
       var wrap = document.getElementById('outraAreaWrap');
       if (wrap) {
@@ -825,7 +827,7 @@ td select { padding: 6px 10px; border-radius: 12px; border: 2px solid var(--line
   function lines(fd, k) { return String(fd.get(k) || '').split('\n').map(function (s) { return s.trim(); }).filter(Boolean); }
   function readVaga(f) {
     var fd = new FormData(f);
-    return { codigo: String(fd.get('codigo') || ''), titulo: String(fd.get('titulo') || '').trim(), segmento: String(fd.get('segmento') || SEGS[0]), modalidade: String(fd.get('modalidade') || ''), horarios: lines(fd, 'horarios'), atividades: lines(fd, 'atividades'), requisitos: lines(fd, 'requisitos'), local: String(fd.get('local') || '').trim(), salario: String(fd.get('salario') || '').trim(), status: String(fd.get('status') || 'rascunho') };
+    return { codigo: String(fd.get('codigo') || ''), titulo: String(fd.get('titulo') || '').trim(), segmento: (String(fd.get('segmento') || SEGS[0]) === 'Outro segmento' && String(fd.get('segOutro') || '').trim()) ? String(fd.get('segOutro')).trim() : String(fd.get('segmento') || SEGS[0]), modalidade: String(fd.get('modalidade') || ''), horarios: lines(fd, 'horarios'), atividades: lines(fd, 'atividades'), requisitos: lines(fd, 'requisitos'), local: String(fd.get('local') || '').trim(), salario: String(fd.get('salario') || '').trim(), status: String(fd.get('status') || 'rascunho') };
   }
   function setErr(f, k, msg) { var el = f.querySelector('[data-err="' + k + '"]'); if (el) el.textContent = msg || ''; }
   document.addEventListener('submit', function (e) {
